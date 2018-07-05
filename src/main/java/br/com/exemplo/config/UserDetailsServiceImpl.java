@@ -12,6 +12,11 @@ import org.springframework.stereotype.Repository;
 import br.com.exemplo.model.Usuario;
 import br.com.exemplo.repository.UsuarioRepository;
 
+/**
+ * 
+ * @author Marcos Araujo
+ *
+ */
 @Repository
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -10,6 +10,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+/**
+ * 
+ * @author Marcos Araujo
+ *
+ */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -19,14 +25,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.GET, "/").permitAll()
-				.anyRequest().authenticated().and().formLogin().permitAll().and().logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
+		http.csrf().disable().authorizeRequests()
+				.antMatchers(HttpMethod.GET, "/listaClientes").hasRole("ADMIN")
+				.antMatchers(HttpMethod.GET, "/listaCarros").hasRole("USER")
+				.antMatchers("/clientes/**").permitAll()
+				.antMatchers("/carros/**").permitAll()
+				.anyRequest().authenticated().and()
+				.formLogin().loginPage("/login").permitAll().and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
-
 }
