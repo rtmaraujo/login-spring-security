@@ -9,7 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
-
+/**
+ * 
+ * @author Marcos Araujo
+ *
+ */
 @Entity
 public class Role implements GrantedAuthority {
 
