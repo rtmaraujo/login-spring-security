@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Lista de Carros</title>
+</head>
+<body>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome/Modelo</th>
+				<th>Ano</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="carro : ${carros}">
+				<td><span th:text="${carro.id}"></span></td>
+				<td><span th:text="${carro.nomeModelo}"></span></td>
+				<td><span th:text="${carro.ano}"></span></td>
+			</tr>
+		</tbody>
+
+	</table>
+	<br/>
+	<a href="/logout">Sair</a>
+</body>
+
+
+</html>
