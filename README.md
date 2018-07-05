@@ -40,23 +40,25 @@ caso queira cadastrar um usuario novo só ir no arquivo import.sql e adicionar e
 no arquivo LoginApplication mostra como gero a senha;
 
 Testes para chamadas Rest:
--Listar clientes: realizar chamada Get sem parametros.
+-Listar clientes ou carros: realizar chamada Get sem parametros.
 http://localhost:8080/clientes
+http://localhost:8080/carros
 
--Adicionar cliente: realizar chamada Post passando os parametros no body com application/json.  
+-Adicionar cliente ou carro: realizar chamada Post passando os parametros no body com application/json.  
 http://localhost:8080/clientes
+http://localhost:8080/carros
 
--Alterar cliente: realizar chamada Put passando os parametros a serem alterados no body como application/json e na url o codigo do cliente a ser alterado.
+-Alterar cliente ou carro: realizar chamada Put passando os parametros a serem alterados no body como application/json e na url o codigo do cliente ou carro a ser alterado.
 http://localhost:8080/clientes/{id}
+http://localhost:8080/carros/{id}
 
--Consultar cliente: realizar chamada Get passando o codigo do cliente como na url.
+-Consultar cliente ou carro: realizar chamada Get passando o codigo do cliente ou carro como na url.
 http://localhost:8080/clientes/{id}
+http://localhost:8080/carros/{id}
 
--Alterar cliente: realizar chamada Delete passando o codigo do cliente que deseja deletar na url.
+-Alterar cliente ou carro: realizar chamada Delete passando o codigo do cliente ou carro que deseja deletar na url.
 http://localhost:8080/clientes/{id}
-
--Listar historico: realizar chamada Get sem parametros.
-http://localhost:8080/historico/listar
+http://localhost:8080/carros/{id}
 
 ## Ferramentas
 -Spring Tools Suite
