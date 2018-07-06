@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.exemplo.error.CustomErrorType;
 import br.com.exemplo.model.Carro;
 import br.com.exemplo.repository.CarroRepository;
 
@@ -38,10 +40,10 @@ public class CarroEndpoint {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Carro> alterarCarro(@PathVariable Long id, @Valid @RequestBody Carro carro) {
+	public ResponseEntity<?> alterarCarro(@PathVariable Long id, @Valid @RequestBody Carro carro) {
 		Carro existeCarro = carroRepository.findOne(id);
 		if (existeCarro == null) {
-			return ResponseEntity.notFound().build();
+			return new ResponseEntity<>(new CustomErrorType("Carro não encontrado id: "+ id), HttpStatus.NOT_FOUND);
 		}
 		BeanUtils.copyProperties(carro, existeCarro, "id");
 		existeCarro = carroRepository.save(existeCarro);
@@ -49,10 +51,10 @@ public class CarroEndpoint {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Carro> consultarCarro(@PathVariable Long id) {
+	public ResponseEntity<?> consultarCarro(@PathVariable Long id) {
 		Carro carro = carroRepository.findOne(id);
 		if (carro == null) {
-			return ResponseEntity.notFound().build();
+			return new ResponseEntity<>(new CustomErrorType("Carro não encontrado id: "+ id), HttpStatus.NOT_FOUND);
 		}
 		return ResponseEntity.ok(carro);
 	}
@@ -63,10 +65,10 @@ public class CarroEndpoint {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> removerCarro(@PathVariable Long id) {
+	public ResponseEntity<?> removerCarro(@PathVariable Long id) {
 		Carro carro = carroRepository.findOne(id);
 		if (carro == null) {
-			return ResponseEntity.notFound().build();
+			return new ResponseEntity<>(new CustomErrorType("Carro não encontrado id: "+ id), HttpStatus.NOT_FOUND);
 		}
 		carroRepository.delete(carro);
 		return ResponseEntity.ok().build();
